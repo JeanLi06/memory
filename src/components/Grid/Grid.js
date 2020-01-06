@@ -1,5 +1,6 @@
 import React, { ant } from 'react'
 import { Checkbox, Form, Button, Input } from 'antd'
+import styles from './Grid.module.css'
 import 'antd/dist/antd.css'
 
 const handleSubmit = (event) => {
@@ -8,15 +9,17 @@ const handleSubmit = (event) => {
 }
 
 const Grid = ({ imagesFromGiphy, onChangeCheckbox, choosenImages }) => {
-  console.log('choosenImages',choosenImages)
   return (
-    <Form layout="inline" onSubmit={handleSubmit}>
+    <Form
+      layout="inline"
+      onSubmit={handleSubmit}
+      className={styles.Grid}
+    >
       <ul>
         {imagesFromGiphy.map((imageFromGiphy, index) => (
           <li key={imageFromGiphy.id}>
             <img alt={imageFromGiphy.slug} src={imageFromGiphy.images.downsized.url} id={imageFromGiphy.id}/>
             <label>
-              Sélectionner
               <input
                 type="checkbox"
                 name="select"

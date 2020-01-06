@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Spin } from 'antd'
 import 'antd/dist/antd.css'
 import './App.css'
-import Grid from './components/Grid'
+import Grid from './components/Grid/Grid'
 
 class App extends Component {
 
@@ -25,9 +25,9 @@ class App extends Component {
   }
 
   getImagesFromGiphy = () => {
-    let limit = 3
+    let imagesQty = 20
     // let limit = this.state.numberOfColumns * this.state.numberOfRows / 2
-    let query = `https://api.giphy.com/v1/gifs/search?q=scrat&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${limit}`
+    let query = `https://api.giphy.com/v1/gifs/search?q=scrat&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${imagesQty}`
     fetch(query,
       {
         method: 'GET',
