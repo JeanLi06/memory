@@ -1,4 +1,4 @@
-.Grid {
+.ChoiceFromGiphyImages {
     background-color: orange;
     display: flex;
     max-width: 800px;
@@ -6,28 +6,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
-.Grid button{
+.ChoiceFromGiphyImages button{
     background-color: #009e8e;
 }
 
-.Grid ul {
+.ChoiceFromGiphyImages ul {
     margin-top: 15px;
 }
 
-.Grid li {
+.ChoiceFromGiphyImages li {
     display: inline-block;
     padding: 5px;
     border: #009e8e 2px solid;
     border-radius: 10px;
 }
 
-.Grid li {
+.ChoiceFromGiphyImages li {
     margin: 0 5px 10px;
 }
 
-.Grid label {
+.ChoiceFromGiphyImages label {
     display: block;
+
 }

@@ -1,30 +1,27 @@
 import React, { ant } from 'react'
-import { Checkbox, Form, Button, Input } from 'antd'
-import styles from './Grid.module.css'
+import { Form, Button, Input } from 'antd'
+import styles from './ChoiceFromGiphyImages.module.css'
 import 'antd/dist/antd.css'
 
-const handleSubmit = (event) => {
-  event.preventDefault()
-  console.log('handlesubmit', event.currentTarget)
-}
 
-const Grid = ({ imagesFromGiphy, onChangeCheckbox, choosenImages }) => {
+
+const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImages, handleSubmit }) => {
   return (
     <Form
       layout="inline"
       onSubmit={handleSubmit}
-      className={styles.Grid}
+      className={styles.ChoiceFromGiphyImages}
     >
       <ul>
         {imagesFromGiphy.map((imageFromGiphy, index) => (
           <li key={imageFromGiphy.id}>
-            <img alt={imageFromGiphy.slug} src={imageFromGiphy.images.downsized.url} id={imageFromGiphy.id}/>
+            <img alt={imageFromGiphy.slug} src={imageFromGiphy.images.preview_gif.url} id={imageFromGiphy.id}/>
             <label>
-              <input
+              <Input
                 type="checkbox"
                 name="select"
                 id={index}
-                data-img-src={imageFromGiphy.images.downsized.url}
+                data-img-src={imageFromGiphy.images.preview_gif.url}
                 onChange={onChangeCheckbox}
               />
             </label>
@@ -33,11 +30,11 @@ const Grid = ({ imagesFromGiphy, onChangeCheckbox, choosenImages }) => {
       </ul>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Choisir
+          Valider
         </Button>
       </Form.Item>
     </Form>
   )
 }
 
-export default Grid
+export default ChoiceFromGiphyImages
