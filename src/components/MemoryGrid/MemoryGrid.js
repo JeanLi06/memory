@@ -1,14 +1,11 @@
 import React from 'react'
 
-//Permet d'ajouter plusiseus classes à un className
-import classNames from 'classnames'
-
 import styles from './MemoryGrid.module.css'
 
 const MemoryGrid = ({ grid, choosenDifficulty}) => {
   choosenDifficulty = 2
   return (
-    <div className={classNames([styles['modal'], styles[`difficulty_`+choosenDifficulty]].join(' '))}>
+    <div className={styles.modal + ' ' + styles[`difficulty_`+choosenDifficulty]}>
       {grid.urls.map((image, index) => (
           //TODO Si l'état est à 'front' //Si l'état est à 'front', on affiche l'url stockée
           grid['states'][index] === 'front'
