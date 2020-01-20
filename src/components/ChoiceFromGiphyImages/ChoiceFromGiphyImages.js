@@ -1,12 +1,18 @@
 import React, { ant } from 'react'
-import { Form, Button, Input } from 'antd'
+import { Form, Button, Input, Radio } from 'antd'
 import styles from './ChoiceFromGiphyImages.module.css'
 import 'antd/dist/antd.css'
+import FormItem from 'antd/lib/form/FormItem'
 
-
-
-const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImages, handleSubmit }) => {
-  return (
+const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImages, handleSubmit, difficulty }) => {
+  return (<>
+    <Radio.Group>
+      <p>Difficulté :
+        {Object.keys(difficulty).map(level => (
+          <Radio value={level} className={styles.radioGroup}>{level}</Radio>
+        ))}
+      </p>
+    </Radio.Group>
     <Form
       layout="inline"
       onSubmit={handleSubmit}
@@ -28,13 +34,13 @@ const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImage
           </li>
         ))}
       </ul>
-      <Form.Item>
+      <FormItem>
         <Button type="primary" htmlType="submit">
           Valider
         </Button>
-      </Form.Item>
+      </FormItem>
     </Form>
-  )
+  </>)
 }
 
 export default ChoiceFromGiphyImages

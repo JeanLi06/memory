@@ -12,7 +12,18 @@ class App extends Component {
     imagesFromGiphylVisible: true,
     imagesFromGiphy: [],
     ids: [],
-    grid: [],
+    difficulty: {
+      '1': { row: 4, col: 3 },
+      '2': { row: 4, col: 4 },
+      '3': { row: 5, col: 4 },
+      '4': { row: 6, col: 5 },
+      '5': { row: 6, col: 6 }
+    },
+    choosenDifficulty: 1,
+    grid: {
+      urls: [],
+      states: []
+    },
     gridIsGenerated: false,
     numberOfCouples: 5,
     isLoaded: false,
@@ -26,7 +37,6 @@ class App extends Component {
     //   isLoaded: true
     // }), 3000)
     // if (this.state.choosenImages.length !== 0 && !this.state.imagesFromGiphylVisible && !this.state.gridIsGenerated) this.generateGrid()
-
   }
 
   getImagesFromGiphy = () => {
@@ -96,15 +106,24 @@ class App extends Component {
     console.log('generateGrid')
     if (!this.state.gridIsGenerated) {
       let image_couples = []
+      //On initialise l'état des images de la future grille (qui pourra être : front, back, found)
+      let states = []
       for (let i = 0; i < this.state.choosenImages.length; i++) {
         //On génère les couples
         image_couples.push(this.state.choosenImages[i])
         image_couples.push(this.state.choosenImages[i])
+
+        //Pour test
+        if (Math.random() < 0.5) states.push('back')
+        else states.push('front')
+        if (Math.random() < 0.5) states.push('back')
+        else states.push('front')
       }
       //  On mélange
       image_couples = [...this.getShuffledArray(image_couples)]
 
-      this.setState({ grid: [...image_couples] })
+      this.setState(this.state.grid.urls = [...image_couples])
+      this.setState(this.state.grid.states = [...states])
       this.setState({ gridIsGenerated: true })
     }
   }
@@ -130,19 +149,20 @@ class App extends Component {
             title="Valider le choix d'images"
           >
             <label>
+              {` Nombre d'images `}
               <InputNumber
                 defaultValue={5}
                 min={5}
                 max={20}
                 value={this.state.numberOfCouples}
                 onChange={this.handleInputNumber}/>
-              {` Nombre d'images`}
             </label>
             <ChoiceFromGiphyImages
               imagesFromGiphy={this.state.imagesFromGiphy}
               choosenImages={this.state.choosenImages}
               onChangeCheckbox={this.onChangeCheckbox}
               handleSubmit={this.handleSubmit}
+              difficulty={this.state.difficulty}
             />
           </div>
           }
@@ -151,6 +171,7 @@ class App extends Component {
             <MemoryGrid
               className="modal"
               grid={this.state.grid}
+              choosenDifficulty={this.state.choosenDifficulty}
               // generateGrid={this.generateGrid}
             />)
           }

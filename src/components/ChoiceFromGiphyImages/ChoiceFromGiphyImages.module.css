@@ -29,5 +29,8 @@
 
 .ChoiceFromGiphyImages label {
     display: block;
+}
 
+.radioGroup{
+    display: inline-block;
 }
