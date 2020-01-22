@@ -12,7 +12,7 @@ class App extends Component {
     imagesFromGiphylVisible: true,
     imagesFromGiphy: [],
     ids: [],
-    difficulty: {
+    difficulties: {
       '1': { row: 4, col: 3 },
       '2': { row: 4, col: 4 },
       '3': { row: 5, col: 4 },
@@ -83,6 +83,11 @@ class App extends Component {
   handleInputNumber = async (value) => {
     await this.setState({ numberOfCouples: value })
     this.getImagesFromGiphy()
+  }
+
+  onChangeRadio = event =>{
+    console.log("onChangeRadio")
+    this.setState({choosenDifficulty: event.target.value})
   }
 
   showModal = () => {
@@ -162,7 +167,9 @@ class App extends Component {
               choosenImages={this.state.choosenImages}
               onChangeCheckbox={this.onChangeCheckbox}
               handleSubmit={this.handleSubmit}
-              difficulty={this.state.difficulty}
+              difficulties={this.state.difficulties}
+              choosenDifficulty={this.state.choosenDifficulty}
+              onChangeRadio={this.onChangeRadio}
             />
           </div>
           }
@@ -171,7 +178,7 @@ class App extends Component {
             <MemoryGrid
               className="modal"
               grid={this.state.grid}
-              choosenDifficulty={this.state.choosenDifficulty}
+              choosenDifficulty={this.state.onChangeRadio}
               // generateGrid={this.generateGrid}
             />)
           }

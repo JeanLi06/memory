@@ -3,7 +3,6 @@ import React from 'react'
 import styles from './MemoryGrid.module.css'
 
 const MemoryGrid = ({ grid, choosenDifficulty}) => {
-  choosenDifficulty = 2
   return (
     <div className={styles.modal + ' ' + styles[`difficulty_`+choosenDifficulty]}>
       {grid.urls.map((image, index) => (
