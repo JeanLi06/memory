@@ -16,8 +16,8 @@ class App extends Component {
       '1': { row: 4, col: 3 },
       '2': { row: 4, col: 4 },
       '3': { row: 5, col: 4 },
-      '4': { row: 6, col: 5 },
-      '5': { row: 6, col: 6 }
+      // '4': { row: 6, col: 5 },
+      // '5': { row: 6, col: 6 }
     },
     choosenDifficulty: 1,
     grid: {
@@ -25,22 +25,19 @@ class App extends Component {
       states: []
     },
     gridIsGenerated: false,
-    numberOfCouples: 5,
-    isLoaded: false,
+    numberOfCouplesToGuess: 6,
+    isImagesFromGiphyLoaded: false,
     choosenImages: [],
   }
 
   async componentDidMount () {
     await this.getImagesFromGiphy()
-    // *************** Pour Test  *********************
-    // setInterval(() => this.setState({
-    //   isLoaded: true
-    // }), 3000)
-    // if (this.state.choosenImages.length !== 0 && !this.state.imagesFromGiphylVisible && !this.state.gridIsGenerated) this.generateGrid()
   }
 
   getImagesFromGiphy = () => {
-    let imagesQty = this.state.numberOfCouples
+    //De manière empirique, on prend le nombre de couples + 4
+    let imagesQty = this.state.numberOfCouplesToGuess + 4
+    this.setState({numberOfCouplesToGuess: this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty)-4})
     let query = `https://api.giphy.com/v1/gifs/search?q=scrat&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${imagesQty}&lang=fr`
     fetch(query,
       {
@@ -51,7 +48,7 @@ class App extends Component {
           .then(json => {
             this.setState({
               imagesFromGiphy: json.data,
-              isLoaded: true
+              isImagesFromGiphyLoaded: true
             })
           })
       })
@@ -80,14 +77,26 @@ class App extends Component {
     // console.log('handlesubmit', event.currentTarget)
   }
 
-  handleInputNumber = async (value) => {
-    await this.setState({ numberOfCouples: value })
-    this.getImagesFromGiphy()
+  //Calcule la quantité d'images à récupérer depuis Giphy, pour le choix utilisateur
+  ImagesQtyToCatchFromGiphy = (difficulty) => {
+    console.log('ImagesQtyToCatchFromGiphy difficulty', difficulty)
+    switch (difficulty.toString()) {
+      case '1' :
+        return 10
+      case '2' :
+        return 12
+      case '3':
+        return 14
+    }
   }
 
-  onChangeRadio = event =>{
-    console.log("onChangeRadio")
-    this.setState({choosenDifficulty: event.target.value})
+  onChangeRadio = async event => {
+    console.log('onChangeRadio', event.target.value)
+    await this.setState({ choosenDifficulty: event.target.value })
+    let numberOfCouplesToGuess = this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty) - 4
+    console.log('numberOfCouplesToGuess', numberOfCouplesToGuess)
+    await this.setState({ numberOfCouplesToGuess })
+    this.getImagesFromGiphy()
   }
 
   showModal = () => {
@@ -134,7 +143,7 @@ class App extends Component {
   }
 
   render () {
-    if (!this.state.isLoaded) {
+    if (!this.state.isImagesFromGiphyLoaded) {
       return (
         <header className="App-header">
           <p>Chargement...</p>
@@ -153,15 +162,6 @@ class App extends Component {
             className="App-center-in-page"
             title="Valider le choix d'images"
           >
-            <label>
-              {` Nombre d'images `}
-              <InputNumber
-                defaultValue={5}
-                min={5}
-                max={20}
-                value={this.state.numberOfCouples}
-                onChange={this.handleInputNumber}/>
-            </label>
             <ChoiceFromGiphyImages
               imagesFromGiphy={this.state.imagesFromGiphy}
               choosenImages={this.state.choosenImages}
@@ -170,6 +170,7 @@ class App extends Component {
               difficulties={this.state.difficulties}
               choosenDifficulty={this.state.choosenDifficulty}
               onChangeRadio={this.onChangeRadio}
+              // ImagesQtyToCatchFromGiphy={this.ImagesQtyToCatchFromGiphy}
             />
           </div>
           }
@@ -178,7 +179,7 @@ class App extends Component {
             <MemoryGrid
               className="modal"
               grid={this.state.grid}
-              choosenDifficulty={this.state.onChangeRadio}
+              choosenDifficulty={this.state.choosenDifficulty}
               // generateGrid={this.generateGrid}
             />)
           }

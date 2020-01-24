@@ -1,6 +1,7 @@
 .ChoiceFromGiphyImages {
     background-color: orange;
     display: flex;
+    width: 95%;
     max-width: 800px;
     flex-wrap: wrap;
     flex-direction: column;

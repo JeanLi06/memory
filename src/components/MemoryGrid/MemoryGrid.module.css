@@ -9,14 +9,14 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 90vw;
-    height: 100%;
+    height: auto;
     border: red solid 2px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
 .difficulty_1{
-    grid-template-columns: auto auto auto auto auto;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: auto auto auto auto ;
+    grid-template-rows: auto auto auto ;
 }
 
 .difficulty_2{

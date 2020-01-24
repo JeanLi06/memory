@@ -11,8 +11,8 @@
 
 img {
     background-size: cover;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
 }
 
 label, p {
@@ -21,7 +21,7 @@ label, p {
 
 .App-header {
     background-color: #282c34;
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
