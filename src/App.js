@@ -37,7 +37,7 @@ class App extends Component {
   getImagesFromGiphy = () => {
     //De manière empirique, on prend le nombre de couples + 4
     let imagesQty = this.state.numberOfCouplesToGuess + 4
-    this.setState({numberOfCouplesToGuess: this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty)-4})
+    this.setState({ numberOfCouplesToGuess: this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty) - 4 })
     let query = `https://api.giphy.com/v1/gifs/search?q=scrat&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${imagesQty}&lang=fr`
     fetch(query,
       {
@@ -92,7 +92,7 @@ class App extends Component {
 
   onChangeRadio = async event => {
     console.log('onChangeRadio', event.target.value)
-    await this.setState({ choosenDifficulty: event.target.value })
+    await this.setState({ choosenDifficulty: parseInt(event.target.value) })
     let numberOfCouplesToGuess = this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty) - 4
     console.log('numberOfCouplesToGuess', numberOfCouplesToGuess)
     await this.setState({ numberOfCouplesToGuess })

@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.module.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,14 +16,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.37925074">
+    <splitter split-orientation="horizontal" split-proportion="0.6230269">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/App.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="297">
-                  <caret line="94" column="10" selection-start-line="94" selection-start-column="10" selection-end-line="94" selection-end-column="10" />
+                <state relative-caret-position="128">
+                  <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                   </folding>
@@ -71,8 +70,11 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="48">
-                  <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+                <state relative-caret-position="239">
+                  <caret line="12" column="41" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="41" />
+                  <folding>
+                    <element signature="e#0#39#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -80,8 +82,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.module.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="192">
-                  <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+                <state relative-caret-position="504">
+                  <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="44" />
                 </state>
               </provider>
             </entry>
@@ -93,8 +95,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="192">
-                  <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+                <state relative-caret-position="504">
+                  <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
                 </state>
               </provider>
             </entry>
@@ -135,12 +137,12 @@
       <find>12</find>
       <find>getImagesFromGiphy</find>
       <find>ImagesQtyToCatchFromGiphy</find>
-      <find>choosenDifficulty</find>
       <find>isLoaded</find>
       <find>numberOfCouples</find>
       <find>numberOfCouplesToGuess</find>
-      <find>ImagesQtyToCatchFromGiphy</find>
       <find>async</find>
+      <find>min-</find>
+      <find>choosenDifficulty</find>
     </findStrings>
     <replaceStrings>
       <replace>imagesFromGiphy</replace>
@@ -161,17 +163,17 @@
         <option value="$PROJECT_DIR$/src/components/Grid/Grid.module.css" />
         <option value="$PROJECT_DIR$/src/components/MemoryGrid/MermoryGrid.module.css" />
         <option value="$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.js" />
-        <option value="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.module.css" />
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.module.css" />
+        <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.module.css" />
         <option value="$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="104" />
-    <option name="y" value="106" />
+    <option name="x" value="-1354" />
+    <option name="y" value="72" />
     <option name="width" value="1648" />
     <option name="height" value="995" />
   </component>
@@ -294,31 +296,32 @@
       <workItem from="1579597590943" duration="5734000" />
       <workItem from="1579681115479" duration="5534000" />
       <workItem from="1579768463071" duration="6754000" />
-      <workItem from="1579817861219" duration="5628000" />
+      <workItem from="1579817861219" duration="5754000" />
+      <workItem from="1580113674039" duration="3434000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123170000" />
+    <option name="totallyTimeSpent" value="126730000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1288" y="46" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.096354164" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15859374" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.10412148" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.11547344" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32752612" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3264642" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -406,6 +409,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.module.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -415,29 +425,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.module.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MemoryGrid/MemoryGrid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="504">
+          <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ChoiceFromGiphyImages/ChoiceFromGiphyImages.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+        <state relative-caret-position="239">
+          <caret line="12" column="41" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="94" column="10" selection-start-line="94" selection-start-column="10" selection-end-line="94" selection-end-column="10" />
+        <state relative-caret-position="128">
+          <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>

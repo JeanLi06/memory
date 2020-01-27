@@ -1,10 +1,17 @@
+/*.ChoiceFromGiphyImages {*/
+    /*background-color: orange;*/
+    /*display: flex;*/
+    /*width: 95%;*/
+    /*max-width: 800px;*/
+    /*flex-wrap: wrap;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+/*}*/
+
 .ChoiceFromGiphyImages {
     background-color: orange;
-    display: flex;
-    width: 95%;
-    max-width: 800px;
     flex-wrap: wrap;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -15,6 +22,8 @@
 
 .ChoiceFromGiphyImages ul {
     margin-top: 15px;
+    display: grid;
+    /*grid-template-columns: repeat(5, 1fr);*/
 }
 
 .ChoiceFromGiphyImages li {
