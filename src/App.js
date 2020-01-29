@@ -68,10 +68,15 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.setState({
-      imagesFromGiphylVisible: false,
-    })
-    this.generateGrid()
+    //On teste si on a choisi suffisamment d'images
+    if (this.state.difficulties[this.state.choosenDifficulty].row *
+      this.state.difficulties[this.state.choosenDifficulty].col / 2 - this.state.choosenImages.length === 0) {
+      this.setState({
+        imagesFromGiphylVisible: false,
+      })
+      this.generateGrid()
+    }
+
     // console.log('handlesubmit', event.currentTarget)
   }
 
@@ -144,9 +149,17 @@ class App extends Component {
   onClickChosenImage = (event) => {
     //On récupère l'index de la carte à retourner, avec le alt
     const indexClicked = parseInt(event.currentTarget.alt.slice(-2))
-    const states=[...this.state.grid.states]
-    states[indexClicked] = 'back'
-    this.setState( this.state.grid.states = states )
+    const states = [...this.state.grid.states]
+    console.log('states[indexClicked]', states[indexClicked])
+    switch (states[indexClicked]) {
+      case 'front':
+        states[indexClicked] = 'back'
+        break
+      case 'back':
+        states[indexClicked] = 'front'
+        break
+    }
+    this.setState(this.state.grid.states = states)
   }
 
   render () {
