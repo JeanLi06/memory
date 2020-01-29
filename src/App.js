@@ -13,11 +13,9 @@ class App extends Component {
     imagesFromGiphy: [],
     ids: [],
     difficulties: {
-      '1': { row: 4, col: 3 },
+      '1': { row: 3, col: 4 },
       '2': { row: 4, col: 4 },
-      '3': { row: 5, col: 4 },
-      // '4': { row: 6, col: 5 },
-      // '5': { row: 6, col: 6 }
+      '3': { row: 4, col: 5 },
     },
     choosenDifficulty: 1,
     grid: {
@@ -142,6 +140,15 @@ class App extends Component {
     }
   }
 
+  //Gère le click sur les images choisies (tester, retourner)
+  onClickChosenImage = (event) => {
+    //On récupère l'index de la carte à retourner, avec le alt
+    const indexClicked = parseInt(event.currentTarget.alt.slice(-2))
+    const states=[...this.state.grid.states]
+    states[indexClicked] = 'back'
+    this.setState( this.state.grid.states = states )
+  }
+
   render () {
     if (!this.state.isImagesFromGiphyLoaded) {
       return (
@@ -180,7 +187,7 @@ class App extends Component {
               className="modal"
               grid={this.state.grid}
               choosenDifficulty={this.state.choosenDifficulty}
-              // generateGrid={this.generateGrid}
+              onClickChosenImage={this.onClickChosenImage}
             />)
           }
         </Fragment>

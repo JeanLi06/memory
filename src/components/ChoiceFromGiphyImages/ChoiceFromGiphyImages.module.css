@@ -10,6 +10,7 @@
 /*}*/
 
 .ChoiceFromGiphyImages {
+    padding: 5px;
     background-color: orange;
     flex-wrap: wrap;
     align-items: center;
