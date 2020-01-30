@@ -26,6 +26,7 @@ class App extends Component {
     numberOfCouplesToGuess: 6,
     isImagesFromGiphyLoaded: false,
     choosenImages: [],
+    clickedPair: []
   }
 
   async componentDidMount () {
@@ -130,14 +131,12 @@ class App extends Component {
         image_couples.push(this.state.choosenImages[i])
         image_couples.push(this.state.choosenImages[i])
 
-        //Pour test
-        if (Math.random() < 0.5) states.push('back')
-        else states.push('front')
-        if (Math.random() < 0.5) states.push('back')
-        else states.push('front')
+        //On retourne les paires de cartes
+        states.push('back')
+        states.push('back')
       }
-      //  On mélange
-      image_couples = [...this.getShuffledArray(image_couples)]
+      //  On mélange (déactivé pour test)
+      // image_couples = [...this.getShuffledArray(image_couples)]
 
       this.setState(this.state.grid.urls = [...image_couples])
       this.setState(this.state.grid.states = [...states])
@@ -145,21 +144,37 @@ class App extends Component {
     }
   }
 
+  updateStateClickedPair = (clickedPair) => {
+    this.setState({ clickedPair: clickedPair })
+  }
+
+  testPair = () => {
+    //  On a cliqué sur 2 cartes ?
+    if (this.state.clickedPair.length >= 1) {
+      //c'est une paire ?
+      const index_image1 = this.state.clickedPair[0]
+      const index_image2 = this.state.clickedPair[1]
+
+      if (this.state.grid.urls[index_image1] === this.state.grid.urls[index_image2]) {
+        console.log('pair')
+      }
+    }
+  }
+
   //Gère le click sur les images choisies (tester, retourner)
-  onClickChosenImage = (event) => {
+  onClickImageGrid = async (event) => {
     //On récupère l'index de la carte à retourner, avec le alt
     const indexClicked = parseInt(event.currentTarget.alt.slice(-2))
     const states = [...this.state.grid.states]
     console.log('states[indexClicked]', states[indexClicked])
-    switch (states[indexClicked]) {
-      case 'front':
-        states[indexClicked] = 'back'
-        break
-      case 'back':
-        states[indexClicked] = 'front'
-        break
+    if (states[indexClicked] === 'back' && this.state.clickedPair.length < 2) {
+      states[indexClicked] = 'front'
+      const clickedPair = [...this.state.clickedPair]
+      clickedPair.push(indexClicked)
+      await this.updateStateClickedPair(clickedPair)
     }
     this.setState(this.state.grid.states = states)
+    this.testPair()
   }
 
   render () {
@@ -177,8 +192,8 @@ class App extends Component {
           <header className="App-header">
             Memory
           </header>
-          {this.state.imagesFromGiphylVisible
-          && <div
+          {this.state.imagesFromGiphylVisible &&
+          <div
             className="App-center-in-page"
             title="Valider le choix d'images"
           >
@@ -200,7 +215,7 @@ class App extends Component {
               className="modal"
               grid={this.state.grid}
               choosenDifficulty={this.state.choosenDifficulty}
-              onClickChosenImage={this.onClickChosenImage}
+              onClickChosenImage={this.onClickImageGrid}
             />)
           }
         </Fragment>
