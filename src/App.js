@@ -144,29 +144,38 @@ class App extends Component {
     }
   }
 
+  testPair = () => {
+    //Si on a 2 cartes
+    if (this.state.clickedPair.length > 1) {
+      //c'est une paire ?
+      const index_image1 = this.state.clickedPair[0]
+      const index_image2 = this.state.clickedPair[1]
+      if (this.state.grid.urls[index_image1] === this.state.grid.urls[index_image2]) {
+        console.log('pair')
+      }
+      //On retourne les cartes au bout de 2 secondes
+      const states = [...this.state.grid.states]
+      states[index_image1] = 'back'
+      states[index_image2] = 'back'
+      console.log(states)
+      setTimeout(() => {
+          this.setState(this.state.grid.states = states)
+        this.setState({clickedPair: []})
+        }
+        , 2000)
+    }
+  }
+
+  //  On a cliqué sur 2 cartes ?
   updateStateClickedPair = (clickedPair) => {
     this.setState({ clickedPair: clickedPair })
   }
 
-  testPair = () => {
-    //  On a cliqué sur 2 cartes ?
-    if (this.state.clickedPair.length >= 1) {
-      //c'est une paire ?
-      const index_image1 = this.state.clickedPair[0]
-      const index_image2 = this.state.clickedPair[1]
-
-      if (this.state.grid.urls[index_image1] === this.state.grid.urls[index_image2]) {
-        console.log('pair')
-      }
-    }
-  }
-
-  //Gère le click sur les images choisies (tester, retourner)
+//Gère le click sur les images choisies (tester, retourner)
   onClickImageGrid = async (event) => {
     //On récupère l'index de la carte à retourner, avec le alt
     const indexClicked = parseInt(event.currentTarget.alt.slice(-2))
     const states = [...this.state.grid.states]
-    console.log('states[indexClicked]', states[indexClicked])
     if (states[indexClicked] === 'back' && this.state.clickedPair.length < 2) {
       states[indexClicked] = 'front'
       const clickedPair = [...this.state.clickedPair]
