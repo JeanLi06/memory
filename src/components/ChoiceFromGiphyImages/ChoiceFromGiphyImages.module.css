@@ -1,30 +1,20 @@
-/*.ChoiceFromGiphyImages {*/
-    /*background-color: orange;*/
-    /*display: flex;*/
-    /*width: 95%;*/
-    /*max-width: 800px;*/
-    /*flex-wrap: wrap;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-/*}*/
-
 .ChoiceFromGiphyImages {
     padding: 5px;
     background-color: orange;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    max-width: 10000px;
 }
 
-.ChoiceFromGiphyImages button{
+.ChoiceFromGiphyImages button {
     background-color: #009e8e;
 }
 
 .ChoiceFromGiphyImages ul {
-    margin-top: 15px;
     display: grid;
-    /*grid-template-columns: repeat(5, 1fr);*/
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    margin-top: 15px;
 }
 
 .ChoiceFromGiphyImages li {
@@ -42,7 +32,11 @@
     display: block;
 }
 
-.radioGroup{
+.radioGroup {
     display: inline-block;
     color: #ffe;
+}
+
+button{
+    margin: 0;
 }

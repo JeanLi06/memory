@@ -26,7 +26,8 @@ class App extends Component {
     numberOfCouplesToGuess: 6,
     isImagesFromGiphyLoaded: false,
     choosenImages: [],
-    clickedPair: []
+    clickedPair: [],
+    foundPairsQty: 0
   }
 
   async componentDidMount () {
@@ -77,8 +78,6 @@ class App extends Component {
       })
       this.generateGrid()
     }
-
-    // console.log('handlesubmit', event.currentTarget)
   }
 
   //Calcule la quantité d'images à récupérer depuis Giphy, pour le choix utilisateur
@@ -152,6 +151,7 @@ class App extends Component {
       const index_image2 = this.state.clickedPair[1]
       if (this.state.grid.urls[index_image1] === this.state.grid.urls[index_image2]) {
         console.log('pair')
+        this.setState(prevState => {return { foundPairsQty: prevState.foundPairsQty + 1 }})
       }
       //On retourne les cartes au bout de 2 secondes
       const states = [...this.state.grid.states]
@@ -160,7 +160,7 @@ class App extends Component {
       console.log(states)
       setTimeout(() => {
           this.setState(this.state.grid.states = states)
-        this.setState({clickedPair: []})
+          this.setState({ clickedPair: [] })
         }
         , 2000)
     }
@@ -195,7 +195,6 @@ class App extends Component {
         </header>
       )
     } else {
-
       return (
         <Fragment>
           <header className="App-header">
@@ -225,6 +224,7 @@ class App extends Component {
               grid={this.state.grid}
               choosenDifficulty={this.state.choosenDifficulty}
               onClickChosenImage={this.onClickImageGrid}
+              foundPairsQty={this.state.foundPairsQty}
             />)
           }
         </Fragment>

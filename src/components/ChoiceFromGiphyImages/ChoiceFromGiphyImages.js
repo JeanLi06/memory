@@ -7,8 +7,8 @@ import FormItem from 'antd/lib/form/FormItem'
 const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImages, handleSubmit, difficulties, choosenDifficulty, onChangeRadio }) => {
   let styleColumnsForGrid = choosenDifficulty + 4
   return (<Fragment>
-    <p>Quantité restantes
-      {difficulties[choosenDifficulty].row * difficulties[choosenDifficulty].col / 2 - choosenImages.length}</p>
+    <p>Restantes :
+      {` `} {difficulties[choosenDifficulty].row * difficulties[choosenDifficulty].col / 2 - choosenImages.length}</p>
     <Radio.Group
       value={choosenDifficulty.toString()}
       onChange={onChangeRadio}>
@@ -28,7 +28,7 @@ const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImage
       onSubmit={handleSubmit}
       className={styles.ChoiceFromGiphyImages}
     >
-      <ul style={{ gridTemplateColumns: `repeat(${styleColumnsForGrid}, 1fr)` }}>
+      <ul>
         {imagesFromGiphy.map((imageFromGiphy, index) => (
           <li key={imageFromGiphy.id}>
             <img alt={imageFromGiphy.slug} src={imageFromGiphy.images.preview_gif.url} id={imageFromGiphy.id}/>
