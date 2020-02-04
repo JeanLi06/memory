@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Button, Spin, InputNumber } from 'antd'
+import { Spin } from 'antd'
 import 'antd/dist/antd.css'
 import './App.css'
 import ChoiceFromGiphyImages from './components/ChoiceFromGiphyImages/ChoiceFromGiphyImages'
 import MemoryGrid from './components/MemoryGrid/MemoryGrid'
 
 class App extends Component {
-
   state = {
     classModal: 'App-modal',
     imagesFromGiphylVisible: true,
@@ -20,14 +19,16 @@ class App extends Component {
     choosenDifficulty: 1,
     grid: {
       urls: [],
-      states: []
+      statesOfCards: []
     },
     gridIsGenerated: false,
     numberOfCouplesToGuess: 6,
     isImagesFromGiphyLoaded: false,
     choosenImages: [],
     clickedPair: [],
-    foundPairsQty: 0
+    foundPairsQty: 0,
+    tryNumber: 0,
+    won: false
   }
 
   async componentDidMount () {
@@ -70,7 +71,7 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    //On teste si on a choisi suffisamment d'images
+    //On teste si on a choisi suffisamment d'images, avant de générer la grille
     if (this.state.difficulties[this.state.choosenDifficulty].row *
       this.state.difficulties[this.state.choosenDifficulty].col / 2 - this.state.choosenImages.length === 0) {
       this.setState({
@@ -102,12 +103,6 @@ class App extends Component {
     this.getImagesFromGiphy()
   }
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    })
-  }
-
   // Retourne un tableau dont les valeurs ont été mélangées aléatoirement
   getShuffledArray = (arr) => {
     const newArr = arr.slice()
@@ -134,11 +129,11 @@ class App extends Component {
         states.push('back')
         states.push('back')
       }
-      //  On mélange (déactivé pour test)
+      //  On mélange (déactiver pour test)
       // image_couples = [...this.getShuffledArray(image_couples)]
 
       this.setState(this.state.grid.urls = [...image_couples])
-      this.setState(this.state.grid.states = [...states])
+      this.setState(this.state.grid.statesOfCards = [...states])
       this.setState({ gridIsGenerated: true })
     }
   }
@@ -150,19 +145,31 @@ class App extends Component {
       const index_image1 = this.state.clickedPair[0]
       const index_image2 = this.state.clickedPair[1]
       if (this.state.grid.urls[index_image1] === this.state.grid.urls[index_image2]) {
-        console.log('pair')
         this.setState(prevState => {return { foundPairsQty: prevState.foundPairsQty + 1 }})
+        const states = [...this.state.grid.statesOfCards]
+        //Si on a trouvé une paire, on l'indique afin qu'elle ne soient pas retournées
+        states[index_image1] = 'found'
+        states[index_image2] = 'found'
+        this.setState(this.state.grid.statesOfCards = states)
+        this.setState({ clickedPair: [] })
       }
-      //On retourne les cartes au bout de 2 secondes
-      const states = [...this.state.grid.states]
-      states[index_image1] = 'back'
-      states[index_image2] = 'back'
-      console.log(states)
-      setTimeout(() => {
-          this.setState(this.state.grid.states = states)
-          this.setState({ clickedPair: [] })
-        }
-        , 2000)
+      const states = [...this.state.grid.statesOfCards]
+      //On retourne les cartes au bout de 2 secondes, si elle ne forment pas une paire
+      if (states[index_image1] !== 'found' && states[index_image1] !== 'found') {
+        states[index_image1] = 'back'
+        states[index_image2] = 'back'
+        console.log(states)
+        setTimeout(() => {
+            this.setState(this.state.grid.statesOfCards = states)
+            this.setState({ clickedPair: [] })
+          }
+          , 2000)
+      }
+      this.setState(prevState => {return { tryNumber: prevState.tryNumber + 1 }})
+    }
+    //Test si on a gagné
+    if(this.state.numberOfCouplesToGuess === this.state.foundPairsQty){
+      this.setState({won: true})
     }
   }
 
@@ -175,14 +182,14 @@ class App extends Component {
   onClickImageGrid = async (event) => {
     //On récupère l'index de la carte à retourner, avec le alt
     const indexClicked = parseInt(event.currentTarget.alt.slice(-2))
-    const states = [...this.state.grid.states]
+    const states = [...this.state.grid.statesOfCards]
     if (states[indexClicked] === 'back' && this.state.clickedPair.length < 2) {
       states[indexClicked] = 'front'
       const clickedPair = [...this.state.clickedPair]
       clickedPair.push(indexClicked)
       await this.updateStateClickedPair(clickedPair)
     }
-    this.setState(this.state.grid.states = states)
+    this.setState(this.state.grid.statesOfCards = states)
     this.testPair()
   }
 
@@ -225,6 +232,8 @@ class App extends Component {
               choosenDifficulty={this.state.choosenDifficulty}
               onClickChosenImage={this.onClickImageGrid}
               foundPairsQty={this.state.foundPairsQty}
+              tryNumber={this.state.tryNumber}
+              won={this.state.won}
             />)
           }
         </Fragment>
@@ -232,5 +241,4 @@ class App extends Component {
     }
   }
 }
-
 export default App

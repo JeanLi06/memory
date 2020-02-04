@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import FormItem from 'antd/lib/form/FormItem'
 
 const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImages, handleSubmit, difficulties, choosenDifficulty, onChangeRadio }) => {
-  let styleColumnsForGrid = choosenDifficulty + 4
+  // let styleColumnsForGrid = choosenDifficulty + 4
   return (<Fragment>
     <p>Restantes :
       {` `} {difficulties[choosenDifficulty].row * difficulties[choosenDifficulty].col / 2 - choosenImages.length}</p>
