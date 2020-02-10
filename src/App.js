@@ -56,19 +56,6 @@ class App extends Component {
       .catch(console.warn)
   }
 
-  onChangeCheckbox = (event) => {
-    const choosenImage = event.target.getAttribute('data-img-src')
-    let choosenImages = [...this.state.choosenImages]
-    if (event.target.checked) {
-      // Sélection
-      choosenImages.push(choosenImage)
-    } else {
-      // Désélection
-      choosenImages.splice(choosenImages.indexOf(choosenImage), 1)
-    }
-    this.setState({ choosenImages })
-  }
-
   handleSubmit = (event) => {
     event.preventDefault()
     //On teste si on a choisi suffisamment d'images, avant de générer la grille
@@ -91,6 +78,21 @@ class App extends Component {
         return 12
       case '3':
         return 14
+    }
+  }
+
+  onClickGiphyImage = event => {
+    console.log('onGiphyClickImage', event.target.getAttribute('src'))
+    let choosenImages = [...this.state.choosenImages]
+    const choosenImage = event.target.getAttribute('src')
+    //On teste si l'image n'est pas déjà sélectionnée
+    if (choosenImage !== null && !choosenImages.includes(choosenImage)) {
+      choosenImages.push(choosenImage)
+      // Désélection
+      // choosenImages.splice(choosenImages.indexOf(choosenImage), 1)
+
+      // choosenImages.splice(choosenImages.indexOf(choosenImage), 1)
+      this.setState({ choosenImages })
     }
   }
 
@@ -130,7 +132,7 @@ class App extends Component {
         states.push('back')
       }
       //  On mélange (déactiver pour test)
-      // image_couples = [...this.getShuffledArray(image_couples)]
+      image_couples = [...this.getShuffledArray(image_couples)]
 
       this.setState(this.state.grid.urls = [...image_couples])
       this.setState(this.state.grid.statesOfCards = [...states])
@@ -168,8 +170,8 @@ class App extends Component {
       this.setState(prevState => {return { tryNumber: prevState.tryNumber + 1 }})
     }
     //Test si on a gagné
-    if(this.state.numberOfCouplesToGuess === this.state.foundPairsQty){
-      this.setState({won: true})
+    if (this.state.numberOfCouplesToGuess === this.state.foundPairsQty) {
+      this.setState({ won: true })
     }
   }
 
@@ -178,7 +180,7 @@ class App extends Component {
     this.setState({ clickedPair: clickedPair })
   }
 
-//Gère le click sur les images choisies (tester, retourner)
+//Gère le click sur les images à deviner (tester, retourner)
   onClickImageGrid = async (event) => {
     //On récupère l'index de la carte à retourner, avec le alt
     const indexClicked = parseInt(event.currentTarget.alt.slice(-2))
@@ -196,17 +198,18 @@ class App extends Component {
   render () {
     if (!this.state.isImagesFromGiphyLoaded) {
       return (
-        <header className="App-header">
-          <p>Chargement...</p>
-          <Spin size="large"/>
-        </header>
+        <Fragment>
+          <h1> Memory </h1>
+          <header className="App-header">
+            <p>Chargement...</p>
+            <Spin size="large"/>
+          </header>
+        </Fragment>
       )
     } else {
       return (
         <Fragment>
-          <header className="App-header">
-            Memory
-          </header>
+          <h1> Memory </h1>
           {this.state.imagesFromGiphylVisible &&
           <div
             className="App-center-in-page"
@@ -215,11 +218,11 @@ class App extends Component {
             <ChoiceFromGiphyImages
               imagesFromGiphy={this.state.imagesFromGiphy}
               choosenImages={this.state.choosenImages}
-              onChangeCheckbox={this.onChangeCheckbox}
               handleSubmit={this.handleSubmit}
               difficulties={this.state.difficulties}
               choosenDifficulty={this.state.choosenDifficulty}
               onChangeRadio={this.onChangeRadio}
+              onClickGiphyImage={this.onClickGiphyImage}
               // ImagesQtyToCatchFromGiphy={this.ImagesQtyToCatchFromGiphy}
             />
           </div>
@@ -241,4 +244,5 @@ class App extends Component {
     }
   }
 }
+
 export default App

@@ -4,7 +4,7 @@ import styles from './ChoiceFromGiphyImages.module.css'
 import 'antd/dist/antd.css'
 import FormItem from 'antd/lib/form/FormItem'
 
-const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImages, handleSubmit, difficulties, choosenDifficulty, onChangeRadio }) => {
+const ChoiceFromGiphyImages = ({ imagesFromGiphy, choosenImages, handleSubmit, difficulties, choosenDifficulty, onChangeRadio, onClickGiphyImage }) => {
   // let styleColumnsForGrid = choosenDifficulty + 4
   return (<Fragment>
     <p>Restantes :
@@ -28,19 +28,11 @@ const ChoiceFromGiphyImages = ({ imagesFromGiphy, onChangeCheckbox, choosenImage
       onSubmit={handleSubmit}
       className={styles.ChoiceFromGiphyImages}
     >
-      <ul>
+      <ul onClick={onClickGiphyImage}>
         {imagesFromGiphy.map((imageFromGiphy, index) => (
           <li key={imageFromGiphy.id}>
             <img alt={imageFromGiphy.slug} src={imageFromGiphy.images.preview_gif.url} id={imageFromGiphy.id}/>
-            <label>
-              <Input
-                type="checkbox"
-                name="select"
-                id={index}
-                data-img-src={imageFromGiphy.images.preview_gif.url}
-                onChange={onChangeCheckbox}
-              />
-            </label>
+
           </li>
         ))}
       </ul>

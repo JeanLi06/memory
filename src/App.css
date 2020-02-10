@@ -19,6 +19,15 @@ label, p {
     color: whitesmoke;
 }
 
+.App-center-in-page p{
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+
+h1{
+    color: wheat;
+}
+
 .App-header {
     background-color: #282c34;
     /*min-height: 100vh;*/
@@ -30,7 +39,6 @@ label, p {
     color: white;
 }
 
-
 .App-center-in-page {
     position: absolute;
     left: 50%;
@@ -39,4 +47,6 @@ label, p {
     text-align: center;
     min-width: 90vw;
     max-width: 10000px;
+    height: 100%;
+    padding-top: 10px;
 }
