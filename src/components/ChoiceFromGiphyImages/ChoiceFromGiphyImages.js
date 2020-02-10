@@ -31,8 +31,14 @@ const ChoiceFromGiphyImages = ({ imagesFromGiphy, choosenImages, handleSubmit, d
       <ul onClick={onClickGiphyImage}>
         {imagesFromGiphy.map((imageFromGiphy, index) => (
           <li key={imageFromGiphy.id}>
-            <img alt={imageFromGiphy.slug} src={imageFromGiphy.images.preview_gif.url} id={imageFromGiphy.id}/>
-
+            <img
+              alt={imageFromGiphy.slug}
+              src={imageFromGiphy.images.preview_gif.url}
+              id={imageFromGiphy.id}
+              style={choosenImages.includes(imageFromGiphy.images.preview_gif.url)
+                ? { border: '#1890ff 5px solid', boxShadow: 'none' }
+                : null}
+            />
           </li>
         ))}
       </ul>

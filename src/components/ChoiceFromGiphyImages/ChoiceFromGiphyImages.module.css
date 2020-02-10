@@ -9,6 +9,7 @@
 
 .ChoiceFromGiphyImages button {
     background-color: #009e8e;
+    margin: 0;
 }
 
 .ChoiceFromGiphyImages ul {
@@ -19,24 +20,14 @@
 
 .ChoiceFromGiphyImages li {
     display: inline-block;
-    /*padding: 5px;*/
-    /*border: #009e8e 2px solid;*/
-    /*border-radius: 10px;*/
-}
-
-.ChoiceFromGiphyImages li {
     margin: 0 5px 10px;
 }
 
-.ChoiceFromGiphyImages label {
-    display: block;
+.ChoiceFromGiphyImages img {
+    box-shadow: #000 1px 1px 10px -3px;
 }
 
 .radioGroup {
     display: inline-block;
     color: #ffe;
-}
-
-button{
-    margin: 0;
 }

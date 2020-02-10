@@ -85,15 +85,13 @@ class App extends Component {
     console.log('onGiphyClickImage', event.target.getAttribute('src'))
     let choosenImages = [...this.state.choosenImages]
     const choosenImage = event.target.getAttribute('src')
-    //On teste si l'image n'est pas déjà sélectionnée
-    if (choosenImage !== null && !choosenImages.includes(choosenImage)) {
+    //On teste si l'image n'est pas déjà sélectionnée et que l'on n'a pas atteint le nombre max à sélectionner
+    if (choosenImage !== null && !choosenImages.includes(choosenImage) && this.state.choosenImages.length < this.state.numberOfCouplesToGuess) {
       choosenImages.push(choosenImage)
-      // Désélection
-      // choosenImages.splice(choosenImages.indexOf(choosenImage), 1)
-
-      // choosenImages.splice(choosenImages.indexOf(choosenImage), 1)
-      this.setState({ choosenImages })
-    }
+    } else
+    // Désélection
+      choosenImages.splice(choosenImages.indexOf(choosenImage), 1)
+    this.setState({ choosenImages })
   }
 
   onChangeRadio = async event => {
@@ -105,7 +103,7 @@ class App extends Component {
     this.getImagesFromGiphy()
   }
 
-  // Retourne un tableau dont les valeurs ont été mélangées aléatoirement
+// Retourne un tableau dont les valeurs ont été mélangées aléatoirement
   getShuffledArray = (arr) => {
     const newArr = arr.slice()
     for (let i = newArr.length - 1; i > 0; i--) {
@@ -115,7 +113,7 @@ class App extends Component {
     return newArr
   }
 
-  //Génère une grille avec des couples d'images, d'après les images choisies
+//Génère une grille avec des couples d'images, d'après les images choisies
   generateGrid = () => {
     console.log('generateGrid')
     if (!this.state.gridIsGenerated) {
@@ -175,7 +173,7 @@ class App extends Component {
     }
   }
 
-  //  On a cliqué sur 2 cartes ?
+//  On a cliqué sur 2 cartes ?
   updateStateClickedPair = (clickedPair) => {
     this.setState({ clickedPair: clickedPair })
   }
