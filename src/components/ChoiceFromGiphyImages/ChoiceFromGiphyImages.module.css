@@ -25,6 +25,7 @@
 
 .ChoiceFromGiphyImages img {
     box-shadow: #000 1px 1px 10px -3px;
+    transition: 0.3s;
 }
 
 .radioGroup {

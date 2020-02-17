@@ -4,11 +4,19 @@ import styles from './ChoiceFromGiphyImages.module.css'
 import 'antd/dist/antd.css'
 import FormItem from 'antd/lib/form/FormItem'
 
-const ChoiceFromGiphyImages = ({ imagesFromGiphy, choosenImages, handleSubmit, difficulties, choosenDifficulty, onChangeRadio, onClickGiphyImage }) => {
-  // let styleColumnsForGrid = choosenDifficulty + 4
+const ChoiceFromGiphyImages = ({ giphyQuery, imagesFromGiphy, choosenImages, handleSubmit, difficulties, choosenDifficulty, onChangeRadio, onClickGiphyImage, handleSearch }) => {
+  //On définit une barre de recherche avec bouton — ant design
+  const { Search } = Input
+
+  const leftImages = difficulties[choosenDifficulty].row * difficulties[choosenDifficulty].col / 2 - choosenImages.length
   return (<Fragment>
     <p>Restantes :
-      {` `} {difficulties[choosenDifficulty].row * difficulties[choosenDifficulty].col / 2 - choosenImages.length}</p>
+      {` `} {leftImages}</p>
+    <Search
+      placeholder={giphyQuery}
+      enterButton
+      onSearch={value => handleSearch(value)}
+    />
     <Radio.Group
       value={choosenDifficulty.toString()}
       onChange={onChangeRadio}>
@@ -36,14 +44,15 @@ const ChoiceFromGiphyImages = ({ imagesFromGiphy, choosenImages, handleSubmit, d
               src={imageFromGiphy.images.preview_gif.url}
               id={imageFromGiphy.id}
               style={choosenImages.includes(imageFromGiphy.images.preview_gif.url)
-                ? { border: '#1890ff 5px solid', boxShadow: 'none' }
-                : null}
+                ? { border: '#1890ff 7px ridge', boxShadow: 'none' }
+                : null
+              }
             />
           </li>
         ))}
       </ul>
       <FormItem>
-        <Button type="primary" htmlType="submit">
+        <Button type={leftImages === 0 ? 'primary' : 'secondary'} htmlType="submit">
           Valider
         </Button>
       </FormItem>

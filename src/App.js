@@ -7,6 +7,7 @@ import MemoryGrid from './components/MemoryGrid/MemoryGrid'
 
 class App extends Component {
   state = {
+    giphyQuerySubject: 'scrat',
     classModal: 'App-modal',
     imagesFromGiphylVisible: true,
     imagesFromGiphy: [],
@@ -36,10 +37,15 @@ class App extends Component {
   }
 
   getImagesFromGiphy = () => {
+    console.log("getImagesFromGiphy")
     //De manière empirique, on prend le nombre de couples + 4
     let imagesQty = this.state.numberOfCouplesToGuess + 4
+    const subject = this.state.giphyQuerySubject
+    console.log("subject", subject)
     this.setState({ numberOfCouplesToGuess: this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty) - 4 })
-    let query = `https://api.giphy.com/v1/gifs/search?q=scrat&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${imagesQty}&lang=fr`
+    let query = `https://api.giphy.com/v1/gifs/search?q=${subject}&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${imagesQty}&lang=fr`
+    console.log("query", query)
+
     fetch(query,
       {
         method: 'GET',
@@ -70,7 +76,6 @@ class App extends Component {
 
   //Calcule la quantité d'images à récupérer depuis Giphy, pour le choix utilisateur
   ImagesQtyToCatchFromGiphy = (difficulty) => {
-    console.log('ImagesQtyToCatchFromGiphy difficulty', difficulty)
     switch (difficulty.toString()) {
       case '1' :
         return 10
@@ -82,7 +87,6 @@ class App extends Component {
   }
 
   onClickGiphyImage = event => {
-    console.log('onGiphyClickImage', event.target.getAttribute('src'))
     let choosenImages = [...this.state.choosenImages]
     const choosenImage = event.target.getAttribute('src')
     //On teste si l'image n'est pas déjà sélectionnée et que l'on n'a pas atteint le nombre max à sélectionner
@@ -193,6 +197,13 @@ class App extends Component {
     this.testPair()
   }
 
+  //Click sur le bouton Rechercher du composant ChoiceFromGiphyImages
+  handleSearch = async (value)=>{
+    await this.setState({giphyQuerySubject: value.trim()})
+    this.getImagesFromGiphy()
+  }
+
+
   render () {
     if (!this.state.isImagesFromGiphyLoaded) {
       return (
@@ -214,6 +225,7 @@ class App extends Component {
             title="Valider le choix d'images"
           >
             <ChoiceFromGiphyImages
+              handleSearch={this.handleSearch}
               imagesFromGiphy={this.state.imagesFromGiphy}
               choosenImages={this.state.choosenImages}
               handleSubmit={this.handleSubmit}
@@ -221,6 +233,7 @@ class App extends Component {
               choosenDifficulty={this.state.choosenDifficulty}
               onChangeRadio={this.onChangeRadio}
               onClickGiphyImage={this.onClickGiphyImage}
+              giphyQuery={this.state.giphyQuerySubject}
               // ImagesQtyToCatchFromGiphy={this.ImagesQtyToCatchFromGiphy}
             />
           </div>
