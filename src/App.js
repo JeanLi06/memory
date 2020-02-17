@@ -34,6 +34,7 @@ class App extends Component {
 
   async componentDidMount () {
     await this.getImagesFromGiphy()
+
   }
 
   getImagesFromGiphy = () => {
@@ -130,8 +131,8 @@ class App extends Component {
         image_couples.push(this.state.choosenImages[i])
 
         //On retourne les paires de cartes
-        states.push('back')
-        states.push('back')
+        states.push('front')
+        states.push('front')
       }
       //  On mélange (déactiver pour test)
       image_couples = [...this.getShuffledArray(image_couples)]
@@ -139,6 +140,17 @@ class App extends Component {
       this.setState(this.state.grid.urls = [...image_couples])
       this.setState(this.state.grid.statesOfCards = [...states])
       this.setState({ gridIsGenerated: true })
+    //  Après 2 secondes, on masque les cartes
+      if (this.state.tryNumber===0) {
+        setTimeout(()=>{
+          let states = []
+          for (let i = 0; i < this.state.choosenImages.length; i++) {
+            states.push('back')
+            states.push('back')
+            this.setState(this.state.grid.statesOfCards = [...states])
+          }
+        },2000)
+      }
     }
   }
 
@@ -162,7 +174,6 @@ class App extends Component {
       if (states[index_image1] !== 'found' && states[index_image1] !== 'found') {
         states[index_image1] = 'back'
         states[index_image2] = 'back'
-        console.log(states)
         setTimeout(() => {
             this.setState(this.state.grid.statesOfCards = states)
             this.setState({ clickedPair: [] })
