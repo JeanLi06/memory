@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react'
 import { Spin } from 'antd'
 import 'antd/dist/antd.css'
 import './App.css'
+import Notice from './components/Notice/Notice'
 import ChoiceFromGiphyImages from './components/ChoiceFromGiphyImages/ChoiceFromGiphyImages'
 import MemoryGrid from './components/MemoryGrid/MemoryGrid'
 
 class App extends Component {
   state = {
+    modalNoticeVisible: true,
     giphyQuerySubject: 'scrat',
-    classModal: 'App-modal',
     imagesFromGiphylVisible: true,
     imagesFromGiphy: [],
     ids: [],
@@ -32,20 +33,19 @@ class App extends Component {
     won: false
   }
 
-  async componentDidMount () {
+  componentDidMount = async () => {
     await this.getImagesFromGiphy()
-
   }
 
   getImagesFromGiphy = () => {
-    console.log("getImagesFromGiphy")
+    console.log('getImagesFromGiphy')
     //De manière empirique, on prend le nombre de couples + 4
     let imagesQty = this.state.numberOfCouplesToGuess + 4
     const subject = this.state.giphyQuerySubject
-    console.log("subject", subject)
+    console.log('subject', subject)
     this.setState({ numberOfCouplesToGuess: this.ImagesQtyToCatchFromGiphy(this.state.choosenDifficulty) - 4 })
     let query = `https://api.giphy.com/v1/gifs/search?q=${subject}&api_key=9Q4AqATZ2rDJfYZ3Wl6aRMS3TxTaCF5m&limit=${imagesQty}&lang=fr`
-    console.log("query", query)
+    console.log('query', query)
 
     fetch(query,
       {
@@ -140,16 +140,16 @@ class App extends Component {
       this.setState(this.state.grid.urls = [...image_couples])
       this.setState(this.state.grid.statesOfCards = [...states])
       this.setState({ gridIsGenerated: true })
-    //  Après 2 secondes, on masque les cartes
-      if (this.state.tryNumber===0) {
-        setTimeout(()=>{
+      //  Après 2 secondes, on masque les cartes
+      if (this.state.tryNumber === 0) {
+        setTimeout(() => {
           let states = []
           for (let i = 0; i < this.state.choosenImages.length; i++) {
             states.push('back')
             states.push('back')
             this.setState(this.state.grid.statesOfCards = [...states])
           }
-        },2000)
+        }, 2000)
       }
     }
   }
@@ -209,11 +209,14 @@ class App extends Component {
   }
 
   //Click sur le bouton Rechercher du composant ChoiceFromGiphyImages
-  handleSearch = async (value)=>{
-    await this.setState({giphyQuerySubject: value.trim()})
+  handleSearch = async (value) => {
+    await this.setState({ giphyQuerySubject: value.trim() })
     this.getImagesFromGiphy()
   }
 
+  hideModalNotice = () => {
+    this.setState({ modalNoticeVisible: false })
+  }
 
   render () {
     if (!this.state.isImagesFromGiphyLoaded) {
@@ -228,7 +231,11 @@ class App extends Component {
       )
     } else {
       return (
-        <Fragment>
+        <Fragment modalNoticeVisible={this.state.modalNoticeVisible}>
+          {this.state.modalNoticeVisible && <Notice
+            className="App-modal-notice"
+            hideModalNotice={this.hideModalNotice}
+          />}
           <h1> Memory </h1>
           {this.state.imagesFromGiphylVisible &&
           <div
@@ -245,14 +252,13 @@ class App extends Component {
               onChangeRadio={this.onChangeRadio}
               onClickGiphyImage={this.onClickGiphyImage}
               giphyQuery={this.state.giphyQuerySubject}
-              // ImagesQtyToCatchFromGiphy={this.ImagesQtyToCatchFromGiphy}
             />
           </div>
           }
           {(this.state.choosenImages.length !== 0 && !this.state.imagesFromGiphylVisible)
           && (
             <MemoryGrid
-              className="modal"
+              className="memory_grid"
               grid={this.state.grid}
               choosenDifficulty={this.state.choosenDifficulty}
               onClickChosenImage={this.onClickImageGrid}
