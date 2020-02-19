@@ -11,7 +11,7 @@ const MemoryGrid = ({ grid, choosenDifficulty, onClickChosenImage, foundPairsQty
         ? <p>Gagné</p>
         : <Fragment>
           <p>Paires trouvées : {foundPairsQty}</p>,
-          <div className={styles.modal + ' ' + styles[`difficulty_` + choosenDifficulty]}>
+          <div className={styles[`difficulty_` + choosenDifficulty]}>
             {grid.urls.map((image, index) => (
                 //Si l'état est à 'front', on affiche l'url stockée
                 grid['statesOfCards'][index] === 'front' || grid['statesOfCards'][index] === 'found'
