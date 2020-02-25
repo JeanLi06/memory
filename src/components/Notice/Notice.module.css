@@ -1,0 +1,12 @@
+.textAlignLeft {
+    text-align: left;
+}
+
+.textColorDark {
+    color: #192c3e;
+}
+
+.textColorDarker {
+    color: black;
+    font-weight: bold;
+}

@@ -129,7 +129,6 @@ class App extends Component {
         //On génère les couples
         image_couples.push(this.state.choosenImages[i])
         image_couples.push(this.state.choosenImages[i])
-
         //On retourne les paires de cartes
         states.push('front')
         states.push('front')
