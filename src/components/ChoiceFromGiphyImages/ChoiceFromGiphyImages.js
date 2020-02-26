@@ -16,12 +16,12 @@ const ChoiceFromGiphyImages = ({ giphyQuery, imagesFromGiphy, choosenImages, han
       placeholder={giphyQuery}
       enterButton
       onSearch={value => handleSearch(value)}
-      style={{ maxWidth: '400px' }}
+      className={styles.search}
     />
     <Radio.Group
       value={choosenDifficulty.toString()}
       onChange={onChangeRadio}>
-      <p style={{marginLeft: '2em'}}>Difficulté :{` `}
+      <p className={styles.difficulty}>Difficulté :{` `}
         {Object.keys(difficulties).map(level => (
           <Radio
             key={level}
@@ -35,7 +35,7 @@ const ChoiceFromGiphyImages = ({ giphyQuery, imagesFromGiphy, choosenImages, han
     <Form
       layout="inline"
       onSubmit={handleSubmit}
-      className={styles.ChoiceFromGiphyImages}
+      className={styles.choiceFromGiphyImages}
     >
       <ul onClick={onClickGiphyImage}>
         {imagesFromGiphy.map((imageFromGiphy, index) => (

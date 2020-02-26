@@ -19,8 +19,8 @@ const Notice = ({hideModalNotice}) => {
     },
   })
   return (
-    <Fragment>
-    </Fragment>
+    <>
+    </>
   )
 }
 

@@ -230,7 +230,7 @@ class App extends Component {
       )
     } else {
       return (
-        <Fragment modalNoticeVisible={this.state.modalNoticeVisible}>
+        <Fragment>
           {this.state.modalNoticeVisible && <Notice
             className="App-modal-notice"
             hideModalNotice={this.hideModalNotice}

@@ -1,4 +1,4 @@
-.ChoiceFromGiphyImages {
+.choiceFromGiphyImages {
     flex-wrap: wrap;
     padding: 5px;
     margin-top: 2em;
@@ -8,27 +8,36 @@
     justify-content: center;
 }
 
-.ChoiceFromGiphyImages button {
+.choiceFromGiphyImages button {
     background-color: #009e8e;
     margin: 0;
 }
 
-.ChoiceFromGiphyImages ul {
+.choiceFromGiphyImages ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     margin-top: 15px;
 }
 
-.ChoiceFromGiphyImages li {
+.choiceFromGiphyImages li {
     display: inline-block;
     margin: 0 5px 10px;
 }
 
-.ChoiceFromGiphyImages img {
+.choiceFromGiphyImages img {
     box-shadow: #000 1px 1px 10px -3px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .radioGroup {
     color: #ffe;
+}
+
+.search {
+    max-width: 400px;
+}
+
+.difficulty {
+    margin-left: 2em;
 }

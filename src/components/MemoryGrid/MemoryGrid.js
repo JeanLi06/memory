@@ -13,7 +13,7 @@ const MemoryGrid = ({ grid, choosenDifficulty, onClickChosenImage, foundPairsQty
           <p>Paires trouvées : {foundPairsQty}</p>,
           <div className={styles.memory_grid + ' ' + styles[`difficulty_` + choosenDifficulty]}>
             {grid.urls.map((image, index) => (
-                //Si l'état est à 'front', on affiche l'url stockée
+                //Si l'état est à 'front', on affiche l'image stockée
                 grid['statesOfCards'][index] === 'front' || grid['statesOfCards'][index] === 'found'
                   ? <img
                     src={image}
@@ -27,6 +27,7 @@ const MemoryGrid = ({ grid, choosenDifficulty, onClickChosenImage, foundPairsQty
                     alt={'Giphy Image ' + index}
                     onClick={onClickChosenImage}
                     key={index}
+                    style={{cursor:'pointer'}}
                   />
                   : null
               )
