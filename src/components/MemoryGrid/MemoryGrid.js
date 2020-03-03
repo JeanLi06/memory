@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 
 import styles from './MemoryGrid.module.css'
-import CardBack from './cardback_cropede.jpg'
+import CardBack from './cardback_croped.jpg'
 
 const MemoryGrid = ({ grid, choosenDifficulty, onClickChosenImage, foundPairsQty, tryNumber, won }) => {
   return (
     <Fragment>
       <p>Essai N°{tryNumber}</p>
       {won
-        ? <p>Gagné</p>
+        ? <p>Gagné !</p>
         : <Fragment>
           <p>Paires trouvées : {foundPairsQty}</p>,
           <div className={styles.memory_grid + ' ' + styles[`difficulty_` + choosenDifficulty]}>
@@ -35,7 +35,6 @@ const MemoryGrid = ({ grid, choosenDifficulty, onClickChosenImage, foundPairsQty
           </div>
         </Fragment>
       }
-
     </Fragment>
   )
 }

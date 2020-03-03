@@ -82,8 +82,10 @@ class App extends Component {
         return 10
       case '2' :
         return 12
-      case '3':
+      case '3' :
         return 14
+      default :
+        return 10
     }
   }
 
@@ -134,10 +136,20 @@ class App extends Component {
         states.push('front')
       }
       //  On mélange (déactiver pour test)
-      image_couples = [...this.getShuffledArray(image_couples)]
-
-      this.setState(this.state.grid.urls = [...image_couples])
-      this.setState(this.state.grid.statesOfCards = [...states])
+      image_couples = this.getShuffledArray(image_couples)
+      this.setState(prevState => ({
+        grid: {
+          ...prevState.grid,
+          urls: image_couples
+        }
+      }))
+      // this.setState(this.state.grid.statesOfCards = [...states])
+      this.setState(prevState => ({
+        grid: {
+          ...prevState.grid,
+          statesOfCards: states
+        }
+      }))
       this.setState({ gridIsGenerated: true })
       //  Après 2 secondes, on masque les cartes
       if (this.state.tryNumber === 0) {
@@ -146,7 +158,12 @@ class App extends Component {
           for (let i = 0; i < this.state.choosenImages.length; i++) {
             states.push('back')
             states.push('back')
-            this.setState(this.state.grid.statesOfCards = [...states])
+            this.setState(prevState => ({
+              grid: {
+                ...prevState.grid,
+                statesOfCards: states
+              }
+            }))
           }
         }, 2000)
       }
@@ -165,7 +182,12 @@ class App extends Component {
         //Si on a trouvé une paire, on l'indique afin qu'elle ne soient pas retournées
         states[index_image1] = 'found'
         states[index_image2] = 'found'
-        this.setState(this.state.grid.statesOfCards = states)
+        this.setState(prevState => ({
+          grid: {
+            ...prevState.grid,
+            statesOfCards: states
+          }
+        }))
         this.setState({ clickedPair: [] })
       }
       const states = [...this.state.grid.statesOfCards]
@@ -174,7 +196,12 @@ class App extends Component {
         states[index_image1] = 'back'
         states[index_image2] = 'back'
         setTimeout(() => {
-            this.setState(this.state.grid.statesOfCards = states)
+            this.setState(prevState => ({
+              grid: {
+                ...prevState.grid,
+                statesOfCards: states
+              }
+            }))
             this.setState({ clickedPair: [] })
           }
           , 2000)

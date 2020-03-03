@@ -53,7 +53,10 @@ const ChoiceFromGiphyImages = ({ giphyQuery, imagesFromGiphy, choosenImages, han
         ))}
       </ul>
       <FormItem>
-        <Button type={leftImages === 0 ? 'primary' : 'secondary'} htmlType="submit">
+        <Button
+          type={leftImages === 0 ? 'primary' : 'secondary'}
+          htmlType="submit"
+        >
           Valider
         </Button>
       </FormItem>
